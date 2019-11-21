@@ -14,7 +14,10 @@ def main():
         reply = f"Today's APOD is [{json2py['title']}]({json2py['url']}).\n\n{json2py['explanation']}"
         bot.send_message(chat_id, reply, parse_mode='markdown')
     else:
-        reply = f"Today's APOD is [{json2py['title']}]({json2py['url']}).\n\n{json2py['explanation']}\n\nCheck out HD picture [here]({json2py['hdurl']})."
+        if 'copyright' not in json2py:
+            reply = f"Today's APOD is [{json2py['title']}]({json2py['url']}).\n\n{json2py['explanation']}\n\nCheck out HD picture [here]({json2py['hdurl']})."
+        else:
+            reply = f"Today's APOD is [{json2py['title']}]({json2py['url']}).\n\n{json2py['explanation']}\n\nCheck out HD picture [here]({json2py['hdurl']}).\n\nImage Credit & Copyright: {json2py['copyright']}."
         bot.send_message(chat_id, reply, parse_mode='markdown')
 
 if __name__ == '__main__':
